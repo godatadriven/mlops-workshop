@@ -1,3 +1,5 @@
 mlflow
 dotenv
 ipykernel
+nbformat
+scikit-learn
