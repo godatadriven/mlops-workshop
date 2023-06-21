@@ -1,8 +1,16 @@
-## mlflow tracking server
+# Experiment Tracking with MLflow 📈
+
+Interactive guide to experiment tracking with MLflow.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dunnkers/experiment-tracking-with-mlflow/blob/main/notebooks/mlflow-demo.ipynb)
+
+## Set up `mlflow` tracking server
 
 ```
-docker build --platform linux/amd64 . -t a59bf2b7938a4e2f97757d53b4f0e602.azurecr.io/data-engineering-mlops-workshop:latest
+ACR_NAME=<YOUR_ACR_REGISTRY_NAME>
+ACR_CONTAINER_NAME=<YOUR_ACR_IMAGE_NAME>
+docker build --platform linux/amd64 . -t $ACR_NAME.azurecr.io/$ACR_CONTAINER_NAME:latest
 az login
-az acr login --name a59bf2b7938a4e2f97757d53b4f0e602
-docker push a59bf2b7938a4e2f97757d53b4f0e602.azurecr.io/data-engineering-mlops-workshop:latest
-```# experiment-tracking-with-mlflow
+az acr login --name $ACR_NAME
+docker push $ACR_NAME.azurecr.io/$ACR_CONTAINER_NAME:latest
+```
