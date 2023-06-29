@@ -1,6 +1,6 @@
 import mlflow
 import pandas as pd
-import plotly_express as px
+import plotly.express as px
 import sklearn.pipeline
 
 # Configure mlflow
