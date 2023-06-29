@@ -1,16 +1,15 @@
+import os
 import mlflow
 import pandas as pd
 import plotly.express as px
 import sklearn.pipeline
 
-# Configure mlflow
-mlflow.set_tracking_uri("http://20.31.89.132:5000")
-mlflow.set_experiment("inference")
-
 # Load model
+mlflow.set_tracking_uri("http://20.31.89.132:5000")
 model: sklearn.pipeline.Pipeline = mlflow.sklearn.load_model(
     "models:/my-epic-model/production"
 )
+mlflow.set_tracking_uri(os.environ["MLFLOW_TRACKING_URI"])
 
 # Load data
 data_url = "https://raw.githubusercontent.com/dunnkers/experiment-tracking-with-mlflow/main/data/scada.parquet" # noqa
