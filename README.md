@@ -14,7 +14,7 @@ az acr create --resource-group <YOUR_RESOURCE_GROUP> --name <YOUR_ACR_REGISTRY_N
 2. Fill in the `.env` file in this project:
    - `RESOURCE_GROUP`: The name of your resource group (`<YOUR_RESOURCE_GROUP>` from step 1)
    - `ACR_NAME`: The name of your Azure Container Registry (`<YOUR_ACR_REGISTRY_NAME>` from step 1)
-   - `ACR_CONTAINER_NAME`: The name of your container image (e.g. `mlflow_image`)
+   - `ACR_IMAGE_NAME`: The name of your container image (e.g. `mlflow_image`)
    - `ACR_USERNAME`: The username of your ACR 
    - `ACR_PASSWORD`: The  password of your ACR
    - `AKS_CLUSTER_NAME`: The name of your AKS cluster (free to choose)
@@ -30,14 +30,14 @@ set +a
 
 4. Build the container image:
 ```bash
-docker build --platform linux/amd64 . -t ${ACR_NAME}.azurecr.io/${ACR_CONTAINER_NAME}:latest
+docker build --platform linux/amd64 . -t ${ACR_NAME}.azurecr.io/${ACR_IMAGE_NAME}:latest
 ```
 
 5. Push the container image to your ACR:
 ```bash
 az login
 az acr login --name $ACR_NAME
-docker push ${ACR_NAME}.azurecr.io/${ACR_CONTAINER_NAME}:latest
+docker push ${ACR_NAME}.azurecr.io/${ACR_IMAGE_NAME}:latest
 ```
 
 > **Note**: You can check if the image is pushed to your ACR with: `az acr repository list --name $ACR_NAME --output table`
@@ -68,7 +68,19 @@ kubectl get service mlflow-service --watch
 ```
 Once the EXTERNAL-IP is assigned, you can access your MLflow instance using that IP address on port 80 (i.e., http://< EXTERNAL-IP >/).
 
-11. Cleanup
+11. Troubleshoot <br>
+If the above step seems to fail, you may want to check your pods:
+```bash
+kubectl get pods
+```
+To get more information about a specific pod, you can use:
+```bash
+kubectl describe pod <POD_NAME>
+```
+If it states the image name is incorrect, you may need to update the line with `image: ${ACR_NAME}.azurecr.io/${ACR_IMAGE_NAME}:latest` in `mlflow-deployment.yaml`, replacing the placeholders `${...}` with the actual values. Run `kubectl apply -f mlflow-deployment.yaml` again to apply the changes. Go back to step 10 to check the status of the service.
+
+
+12. Cleanup
 
 ```bash
 az group delete --name $RESOURCE_GROUP
