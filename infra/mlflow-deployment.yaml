@@ -1,18 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mlflow-data-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mlflow-artifacts-pvc
+  name: mlflow-pvc
 spec:
   accessModes:
     - ReadWriteOnce
@@ -35,54 +24,30 @@ spec:
         app: mlflow
     spec:
       containers:
-        - name: mlflow-container
+        - name: mlflow
           image: ${ACR_NAME}.azurecr.io/${ACR_IMAGE_NAME}:latest
           ports:
             - containerPort: 5000
-          resources:
-            requests:
-              cpu: 100m
-              memory: 200Mi
-            limits:
-              cpu: 200m
-              memory: 500Mi
           volumeMounts:
             - name: mlflow-data
-              mountPath: /data
-            - name: mlflow-artifacts
-              mountPath: /artifacts
+              mountPath: /mlflow
+              subPath: mlflow.db
+      imagePullSecrets:
+        - name: acr-secret
       volumes:
         - name: mlflow-data
           persistentVolumeClaim:
-            claimName: mlflow-data-pvc
-        - name: mlflow-artifacts
-          persistentVolumeClaim:
-            claimName: mlflow-artifacts-pvc
-      imagePullSecrets:
-        - name: acr-secret
+            claimName: mlflow-my-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mlflow-service
 spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 5000
+      protocol: TCP
   selector:
     app: mlflow
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 5000
-  type: LoadBalancer
----
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: mlflow-deployment-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: mlflow-deployment
-  minReplicas: 1
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 80
