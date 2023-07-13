@@ -1,0 +1,74 @@
+name: Build, Push and Deploy
+
+on:
+  pull_request:
+    types:
+      - closed
+
+# Change to the cloud provider you are using (azure or gcp)
+env:
+  CLOUD_PROVIDER: azure
+  # CLOUD_PROVIDER: gcp
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest
+
+  deploy_azure:
+    if: contains(toLower(env.CLOUD_PROVIDER), 'azure')
+    needs: build_and_push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}" }'
+
+      # Assuming the instance has already been created
+      - name: Deploy to Azure Container Instances
+        run: |
+          az container update --name turbine-app --resource-group mlops-worshop --image ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest
+
+  deploy_google:
+    if: contains(toLower(env.CLOUD_PROVIDER), 'gcp')
+    needs: build_and_push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.1
+        with:
+          project_id: mlops-workshop-project
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          export_default_credentials: true
+
+      - name: Deploy to Google Cloud Run
+        run: |
+          gcloud run deploy turbine-app --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest --platform managed --region europe-west1 --allow-unauthenticated --project mlops-workshop-project
