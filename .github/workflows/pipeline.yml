@@ -47,21 +47,21 @@ jobs:
         run: |
           az container update --name turbine-app --resource-group mlops-worshop --image ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest
 
-  # deploy_google:
-  #   needs: build_and_push
-  #   runs-on: ubuntu-latest
+  deploy_google:
+    needs: build_and_push
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  #     - name: Set up Google Cloud SDK
-  #       uses: google-github-actions/setup-gcloud@v0.2.1
-  #       with:
-  #         project_id: mlops-workshop-project
-  #         service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-  #         export_default_credentials: true
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.1
+        with:
+          project_id: mlops-workshop-project
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          export_default_credentials: true
 
-  #     - name: Deploy to Google Cloud Run
-  #       run: |
-  #         gcloud run deploy turbine-app --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest --platform managed --region europe-west1 --allow-unauthenticated --project mlops-workshop-project
+      - name: Deploy to Google Cloud Run
+        run: |
+          gcloud run deploy turbine-app --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest --platform managed --region europe-west1 --allow-unauthenticated --project mlops-workshop-project

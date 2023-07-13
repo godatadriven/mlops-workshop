@@ -229,6 +229,27 @@ Add New Repository Secret
 
 ![Alt text](image-2.png)
 
-And you can check docker hub as well to see if the image is there.
+Finding secrets for Azure:
+- Go to portal (portal.azure.com)
+- Navigate to Active Directory from the top menu
+- Select App Registrations from the left menu and create a new app registration if there is none
+![Alt text](images/image-44.png)
+- Once created, you can copy the tenant ID. Register this as a secret in your GitHub repository under the name `AZURE_TENANT_ID`.
+![Alt text](images/image-41.png)
+- Create secret in your app registration
+![Alt text](images/image-42.png)
+- Once created, you can copy the client ID and value. Register these as the secrets `AZURE_CLIENT_ID` and `AZURE_CLIENT_SECRET` in your GitHub repository.
+- Finally, you can find the subscription ID [here](https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade). Register this as the secret `AZURE_SUBSCRIPTION_ID` in your GitHub repository.
 
-hi
+Finding secrets for GCP:
+- Go to the [GCP console](https://console.cloud.google.com/)
+- Navigate to IAM & Admin from the top menu
+- Go to Service Accounts from the left menu
+- Click on Create Service Account
+- Give it a name and access rights (e.g. Cloud Run Admin)
+- Once created, click on the options next to the service account and select Manage Keys
+- Click Create New Key and select JSON
+- A file will be downloaded. Copy its content into a GitHub secret called `GCP_SERVICE_ACCOUNT_KEY`.
+
+Tada!
+![Alt text](iamges/image-43.png)
