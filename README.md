@@ -230,3 +230,4 @@ Add New Repository Secret
 ![Alt text](image-2.png)
 
 And you can check docker hub as well to see if the image is there.
+
