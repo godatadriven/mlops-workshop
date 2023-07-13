@@ -206,3 +206,19 @@ and use this image in all subsequent steps
 ## Troubleshoot
 
 If container doesn't start, the mlflow server may be broken.
+
+
+
+## Bonus: CI/CD with GitHub Actions
+
+1. Inspect files
+
+2. 
+In settings, select 
+![Alt text](images/image-7.png)
+
+Add New Repository Secret
+
+1. Add dockerhub secrets
+
+2 Create and merge a pull request

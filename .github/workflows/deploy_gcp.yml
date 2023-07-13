@@ -23,4 +23,4 @@ jobs:
 
       - name: Deploy to Google Cloud Run
         run: |
-          gcloud run deploy turbine-app --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest-amd64 --platform managed --region europe-west1 --allow-unauthenticated --project mlops-workshop-project
+          gcloud run deploy turbine-app --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest --platform managed --region europe-west1 --allow-unauthenticated --project mlops-workshop-project
