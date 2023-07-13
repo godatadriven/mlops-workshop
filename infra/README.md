@@ -1,12 +1,23 @@
 
-# Set up `mlflow` tracking server
+# How to set up the MLflow tracking server
+
+
+## Pre-requisites
+
+- Docker installed
+- Kubernetes CLI
+- ...
+
+## Setup on Azure Kubernetes Service (AKS)
+
+The following setup is tailored towards Azure, but can easily extended to other cloud services, as we only need a container registry, a kubernetes cluster, and a place for us to ...
 
 1. Create an Azure Container Registry if you don't have one yet:
 ```bash
 az acr create --resource-group <YOUR_RESOURCE_GROUP> --name <YOUR_ACR_REGISTRY_NAME> --sku Basic --admin-enabled true
 ```
 
-2. Fill in the `.env` file in this project:
+1. Fill in the `.env` file in this project:
    - `RESOURCE_GROUP`: The name of your resource group (`<YOUR_RESOURCE_GROUP>` from step 1)
    - `ACR_NAME`: The name of your Azure Container Registry (`<YOUR_ACR_REGISTRY_NAME>` from step 1)
    - `ACR_IMAGE_NAME`: The name of your container image (e.g. `mlflow_image`)
@@ -64,7 +75,8 @@ kubectl get service mlflow-service --watch
 Once the EXTERNAL-IP is assigned, you can access your MLflow instance using that IP address on port 80 (i.e., http://< EXTERNAL-IP >/).
 
 11. Troubleshoot <br>
-If the above step seems to fail, you may want to check your pods:
+
+11.1 If the above step seems to fail, you may want to check your pods:
 ```bash
 kubectl get pods
 ```
@@ -74,8 +86,10 @@ kubectl describe pod <POD_NAME>
 ```
 If it states the image name is incorrect, you may need to update the line with `image: ${ACR_NAME}.azurecr.io/${ACR_IMAGE_NAME}:latest` in `mlflow-deployment.yaml`, replacing the placeholders `${...}` with the actual values. Run `kubectl apply -f mlflow-deployment.yaml` again to apply the changes. Go back to step 10 to check the status of the service.
 
+11.2 If computational limits are reached, increase the number of replicas in `mlflow-deployment.yaml` and apply the changes with `kubectl apply -f mlflow-deployment.yaml`.
 
-12. Cleanup
+
+1.  Cleanup
 
 ```bash
 az group delete --name $RESOURCE_GROUP
