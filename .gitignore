@@ -139,4 +139,7 @@ cython_debug/
 
 # MLFlow
 mlruns
+mlartifacts
+
+# Mac
 .DS_Store
