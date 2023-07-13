@@ -1,6 +1,10 @@
-name: Deploy to Azure Container Instances
+name: Deploy to Google Cloud Run
 
-on: [workflow_call]
+on:
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
 
 jobs:
   deploy_to_azure:

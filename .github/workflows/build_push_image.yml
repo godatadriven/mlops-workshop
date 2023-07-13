@@ -1,6 +1,9 @@
 name: Build and Push Docker Image
 
-on: [workflow_call]
+on:
+  pull_request:
+    types:
+      - closed
 
 jobs:
   build_and_push:
