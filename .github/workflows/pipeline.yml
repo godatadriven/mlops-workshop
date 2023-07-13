@@ -35,7 +35,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest
 
   deploy_azure:
-    if: contains(toLower(env.CLOUD_PROVIDER), 'azure')
+    if: contains(env.CLOUD_PROVIDER, 'azure')
     needs: build_and_push
     runs-on: ubuntu-latest
 
@@ -54,7 +54,7 @@ jobs:
           az container update --name turbine-app --resource-group mlops-worshop --image ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest
 
   deploy_google:
-    if: contains(toLower(env.CLOUD_PROVIDER), 'gcp')
+    if: contains(env.CLOUD_PROVIDER, 'gcp')
     needs: build_and_push
     runs-on: ubuntu-latest
 
