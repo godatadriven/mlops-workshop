@@ -1,0 +1,26 @@
+name: Deploy to Google Cloud Run
+
+on:
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  deploy_to_azure:
+    needs: build_and_push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}" }'
+
+      # Assuming the instance has already been created
+      - name: Deploy to Azure Container Instances
+        run: |
+          az container update --name turbine-app --resource-group mlops-worshop --image ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest

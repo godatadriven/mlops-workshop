@@ -1,0 +1,26 @@
+name: Deploy to Google Cloud Run
+
+on:
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  deploy_to_gcp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.1
+        with:
+          project_id: mlops-workshop-project
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          export_default_credentials: true
+
+      - name: Deploy to Google Cloud Run
+        run: |
+          gcloud run deploy turbine-app --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest-amd64 --platform managed --region europe-west1 --allow-unauthenticated --project mlops-workshop-project
