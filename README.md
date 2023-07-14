@@ -223,11 +223,11 @@ Add New Repository Secret
 
 2 Create and merge a pull request
 
-![Alt text](image.png)
+![Alt text](images/image-45.png)
 
-![Alt text](image-1.png)
+![Alt text](images/image-46.png)
 
-![Alt text](image-2.png)
+![Alt text](images/image-2.png)
 
 Finding secrets for Azure:
 - Go to portal (portal.azure.com)
