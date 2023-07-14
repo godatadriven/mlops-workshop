@@ -1,7 +1,7 @@
 {
     "image": "mcr.microsoft.com/devcontainers/python:3.8",
     "postCreateCommand": "sh .devcontainer/devcontainer_setup.sh",
-    "features": {
-        "docker-in-docker": "true"
-    }
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ]
 }
