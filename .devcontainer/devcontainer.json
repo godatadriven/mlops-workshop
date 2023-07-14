@@ -1,4 +1,7 @@
 {
     "image": "mcr.microsoft.com/devcontainers/python:3.8",
-    "postCreateCommand": "sh .devcontainer/devcontainer_setup.sh"
+    "postCreateCommand": "sh .devcontainer/devcontainer_setup.sh",
+    "features": {
+        "docker-in-docker": "true"
+    }
 }
