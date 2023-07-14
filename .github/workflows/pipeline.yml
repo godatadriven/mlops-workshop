@@ -41,6 +41,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          environment: "AzureStack"
 
       # Create or update container instance
       - name: Deploy to Azure Container Instances
