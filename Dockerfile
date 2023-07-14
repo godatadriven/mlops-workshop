@@ -1,3 +1,7 @@
+# This file is used to containerize our application
+# It specifies which files to copy into the container, which 
+# packages to install, and which command to run for the application.
+
 # Ruild using: docker build -t <image-name> .
 # Run using: docker run -p 8080:8080 <image-name>
 
@@ -7,7 +11,7 @@ FROM python:3.8-slim
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copy the directory contents into the container at /app
 COPY /turbine_power /app/turbine_power
 COPY pyproject.toml /app
 COPY setup.cfg /app
