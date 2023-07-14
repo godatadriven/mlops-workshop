@@ -45,9 +45,9 @@ jobs:
       # Assuming the instance has already been created
       - name: Deploy to Azure Container Instances
         run: |
-          az container update --name turbine-app --resource-group mlops-worshop --image ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest
+          az container restart --name turbine-app --resource-group mlops-worshop
 
-  deploy_google:
+  deploy_gcp:
     needs: build_and_push
     runs-on: ubuntu-latest
 
