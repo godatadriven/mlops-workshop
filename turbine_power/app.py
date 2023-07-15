@@ -12,7 +12,7 @@ class InputData(BaseModel):
     is_curtailed: List[float] = Field(examples=[[False, False]])
 
 stage = "production"
-model_name = "my-epic-model"
+model_name = "turbine-model"
 model = model_utils.load_model(model_name, stage)
 features = model_utils.get_features(model_name, stage)
 app = FastAPI()
