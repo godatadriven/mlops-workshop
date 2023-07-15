@@ -37,9 +37,11 @@ spec:
       volumes:
         - name: mlflow-data
           persistentVolumeClaim:
+            readOnly: false
             claimName: mlflow-data-pvc
         - name: mlflow-artifacts
           persistentVolumeClaim:
+            readOnly: false
             claimName: mlflow-artifacts-pvc
       containers:
         - name: mlflow
@@ -65,11 +67,10 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 80
+    - port: 5000
       targetPort: 5000
   selector:
     app: mlflow
-
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -81,7 +82,7 @@ spec:
     kind: Deployment
     name: mlflow-deployment
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 6
   metrics:
     - type: Resource
       resource:
