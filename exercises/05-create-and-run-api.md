@@ -16,9 +16,12 @@ Exercises:
 python turbine_power/app.py
 ```
 3. When prompted, navigate to the given URL in your browser: [http://0.0.0.0:8080](http://0.0.0.0:8080)
-4. Check out the Swagger UI by adding `/docs` to end of the URL in your browser: [http://0.0.0.0:8080/docs](http://0.0.0.0:8080/docs)
-5. Select the `/predict` endpoint in the UI, click "Try it out" in the top right corner, and click "Execute".
-6. Scroll down to see our API's response.
+
+> **Note**: If you can't reach the URL and you're working in Codespaces, make sure to add the port 8080 in the Ports section of your terminal window.
+
+1. Check out the Swagger UI by adding `/docs` to end of the URL in your browser: [http://0.0.0.0:8080/docs](http://0.0.0.0:8080/docs)
+2. Select the `/predict` endpoint in the UI, click "Try it out" in the top right corner, and click "Execute".
+3. Scroll down to see our API's response.
 
 ## Finish the application
 
