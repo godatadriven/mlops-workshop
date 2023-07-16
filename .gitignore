@@ -143,3 +143,5 @@ mlartifacts
 
 # Mac
 .DS_Store
+
+google-cloud-sdk*
