@@ -44,8 +44,9 @@ These are the steps to get started with GitHub Codespaces:
 4. Click on "Open Codespaces on main"
 5. Wait until your environment is set up (this may take a while) and your terminal is ready
 6. Wait a little bit longer, as a another setup step will run automatically
-7. Once done, add port 8080 to the "Ports" section of the Codespaces window
-8. Continue setting up in the "Installing dependencies" section below
+7. The setup is done when you you can run `docker` in a terminal and get a list of commands
+8. Once done, add port 8080 to the "Ports" section of the Codespaces window
+9. Continue setting up in the "Installing dependencies" section below
 
 > **Note:** In Codespaces, you are working within a Docker container which is running on Github's servers.  However, since we'll be covering containerization in this tutorial, we need to be able to create containers, within a container! If this does not work for you, make sure your Docker application is running by opening it locally, and then select "Rebuild container" from the command pallette, which you can open with CMD/CTRL + SHIFT + P. This may help. If it doesn't, we recommend using your own editor instead of Codespaces (see section above).
 
@@ -81,7 +82,7 @@ No ouput? Good! <br>Getting a `ModuleNotFoundError`? Not good... Double check if
 
 6. Now your environment should be ready! Make sure, in all of the following, that you are running code within this environment (`.venv`). That means, if you create a new terminal, make sure to run `source .venv/bin/activate` again. That also means, if you run a notebook, select `.venv` as the kernel.
 
-> **Note:** You may have to install the kernel first, depending on which editor you use. In the above instructions, we are assuming a VSCode environment, in which this is not necessary. 
+> **Note:** You may have to install the kernel first, depending on which editor you use. In the above instructions, we are assuming a VSCode environment, in which this is not necessary.
 
 
 ## **Exercises** 🧑‍💻
