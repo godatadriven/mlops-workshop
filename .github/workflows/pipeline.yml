@@ -27,7 +27,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/turbine-image:latest
 
   deploy_azure:
     needs: build_and_push
@@ -46,14 +46,14 @@ jobs:
         run: |
           az container create \
             --name turbine-app \
-            --resource-group mlops-workshop \
-            --image ${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest \
+            --resource-group mlops-tutorial \
+            --image ${{ secrets.DOCKERHUB_USERNAME }}/turbine-image:latest \
             --dns-name-label turbine-app \
             --ports 8080 \
             --ip-address public || \
           az container restart \
             --name turbine-app \
-            --resource-group mlops-workshop
+            --resource-group mlops-tutorial
 
   deploy_gcp:
     needs: build_and_push
@@ -73,8 +73,8 @@ jobs:
       - name: Deploy to Google Cloud Run
         run: |
           gcloud run deploy turbine-app \
-            --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/mlops-workshop-image:latest \
+            --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/turbine-image:latest \
             --platform managed \
             --region europe-west1 \
             --allow-unauthenticated \
-            --project mlops-workshop-project
+            --project mlops-tutorial-project

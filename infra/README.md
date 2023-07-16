@@ -6,11 +6,10 @@
 
 - Docker installed
 - Kubernetes CLI
-- ...
 
 ## Setup on Azure Kubernetes Service (AKS)
 
-The following setup is tailored towards Azure, but can easily extended to other cloud services, as we only need a container registry, a kubernetes cluster, and a place for us to ...
+The following setup is tailored towards Azure, but can easily extended to other cloud services, as we only need a container registry and a kubernetes cluster.
 
 1. Create an Azure Container Registry if you don't have one yet:
 ```bash
