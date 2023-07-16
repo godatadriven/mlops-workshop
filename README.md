@@ -61,13 +61,17 @@ python -m venv .venv
 ```bash
 source .venv/bin/activate
 ```
-3. Install the dependencies
+3. Install the environment as kernel so we can use it in Jupyter
+```bash
+ipython kernel install --name ".venv" --user
+```
+4. Install the dependencies
 ```bash
 pip install -e ".[notebook]"
 ```
 Not working? Double check in which folder you are running this in. It should contain `pyproject.toml` and `setup.cfg`.
 
-4.  Check if all went well:
+5.  Check if all went well:
 ```bash
 python -c "import turbine_power"
 ```
@@ -75,7 +79,7 @@ No ouput? Good! <br>Getting a `ModuleNotFoundError`? Not good... Double check if
 
 > **Note:** If you're getting installation errors, consider switching to Codespaces if you're working in your own editor.
 
-5. Now your environment should be ready! Make sure, in all of the following, that you are running code within this environment (`.venv`). That means, if you create a new terminal, make sure to run `source .venv/bin/activate` again. That also means, if you run a notebook, select `.venv` as the kernel.
+6. Now your environment should be ready! Make sure, in all of the following, that you are running code within this environment (`.venv`). That means, if you create a new terminal, make sure to run `source .venv/bin/activate` again. That also means, if you run a notebook, select `.venv` as the kernel.
 
 > **Note:** You may have to install the kernel first, depending on which editor you use. In the above instructions, we are assuming a VSCode environment, in which this is not necessary. 
 
