@@ -1,5 +1,5 @@
 # Dataset
 
-In this tutorial, we are using publicly available data from a wind turbine in Turkey. We repeat: the data is not classified and is openly available.
+In this tutorial, we are using publicly available data from a wind turbine in Turkey. 
 
 See: https://www.kaggle.com/datasets/berkerisen/wind-turbine-scada-dataset

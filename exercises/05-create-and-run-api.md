@@ -10,7 +10,7 @@ We've already made a start with the implementation in `/turbine_power/app.py`.
 
 Exercises:
 
-1. Inspect the code
+1. Inspect the code in `/turbine_power/app.py`
 2. Run the application with:
 ```
 python turbine_power/app.py
@@ -29,3 +29,5 @@ Exercises:
 1. Open `/turbine_power/app.py` in your editor
 2. Change the `/predict` endpoint to use our model
 3. Try it out again in the Swagger UI!
+
+🎉

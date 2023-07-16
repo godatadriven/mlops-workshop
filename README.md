@@ -11,7 +11,7 @@ Before we get started, we need to make sure you have access to a coding environm
 
 ### **Prerequisites**
 
-- Make sure you have Docker installed and running  #TODO PREP: add link
+- Make sure you have [Docker](https://docs.docker.com/engine/install/) installed and running
 - (optional) Fork this repository so you can make changes to it. This will be useful if you want to work on the bonus CI/CD exercise.
 
 ### **Setting up your editor**
@@ -30,7 +30,7 @@ These are the steps to get started with your own editor (e.g. VSCode):
 git clone ...   # TODO PREP
 ```
 
-1. Open this folder of the cloned repo in your editor
+1. Open this folder (the cloned repo) in your editor
 2. Open a terminal in this folder
 3. Continue setting up in the "Installing dependencies" section below
 
@@ -38,11 +38,9 @@ git clone ...   # TODO PREP
 
 These are the steps to get started with GitHub Codespaces:
 
-<!-- #TODO PREP -->
-
 1. Navigate to this repository [on GitHub](https://github.com/ykerus/mlops-tutorial).
 2. Click on the "Code" button on the right above the folder structure
-3. Select "Remote"
+3. Select "Codespaces"
 4. Click on "Open Codespaces on main"
 5. Wait until your environment is set up (this may take a while) and your terminal is ready
 6. Continue setting up in the "Installing dependencies" section below
@@ -64,7 +62,7 @@ source .venv/bin/activate
 ```
 3. Install the dependencies
 ```bash
-pip install -e .
+pip install -e ".[notebook]"
 ```
 Not working? Double check in which folder you are running this in. It should contain `pyproject.toml` and `setup.cfg`.
 

@@ -1,6 +1,6 @@
 # Containerizing the application 🐳
 
-We've now created an API that uses our model to make predictions. However, we are still running it locally, so other cannot benefits from it yet. 
+We've now created an API that uses our model to make predictions. However, we are still running it locally, so others cannot benefits from it yet. 
 
 We need our API to run on a server, so others can use it.
 Let's now containerize our application, so we can easily deploy it to a server.
@@ -32,4 +32,4 @@ docker run -p 8080:8080 turbine-image
 
 4. When prompted, navigate to the URL in your browser: [http://0.0.0.0:8080/docs](http://0.0.0.0:8080/docs) and try the API again!
 
-Exacly the same as before, but now running in a container!
+Exacly the same as before, but now running in a container! 🎉

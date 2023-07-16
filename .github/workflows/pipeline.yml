@@ -29,52 +29,52 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/turbine-image:latest
 
-  deploy_azure:
-    needs: build_and_push
-    runs-on: ubuntu-latest
+  # deploy_azure:
+  #   needs: build_and_push
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #     - name: Login to Azure
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure Container Instances
-        run: |
-          az container create \
-            --name turbine-app \
-            --resource-group mlops-tutorial \
-            --image ${{ secrets.DOCKERHUB_USERNAME }}/turbine-image:latest \
-            --dns-name-label turbine-app \
-            --ports 8080 \
-            --ip-address public || \
-          az container restart \
-            --name turbine-app \
-            --resource-group mlops-tutorial
+  #     - name: Deploy to Azure Container Instances
+  #       run: |
+  #         az container create \
+  #           --name turbine-app \
+  #           --resource-group mlops-tutorial \
+  #           --image ${{ secrets.DOCKERHUB_USERNAME }}/turbine-image:latest \
+  #           --dns-name-label turbine-app \
+  #           --ports 8080 \
+  #           --ip-address public || \
+  #         az container restart \
+  #           --name turbine-app \
+  #           --resource-group mlops-tutorial
 
-  deploy_gcp:
-    needs: build_and_push
-    runs-on: ubuntu-latest
+  # deploy_gcp:
+  #   needs: build_and_push
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
 
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0.2.1
-        with:
-          project_id: mlops-workshop-project
-          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-          export_default_credentials: true
+  #     - name: Set up Google Cloud SDK
+  #       uses: google-github-actions/setup-gcloud@v0.2.1
+  #       with:
+  #         project_id: mlops-workshop-project
+  #         service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+  #         export_default_credentials: true
 
-      - name: Deploy to Google Cloud Run
-        run: |
-          gcloud run deploy turbine-app \
-            --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/turbine-image:latest \
-            --platform managed \
-            --region europe-west1 \
-            --allow-unauthenticated \
-            --project mlops-tutorial-project
+  #     - name: Deploy to Google Cloud Run
+  #       run: |
+  #         gcloud run deploy turbine-app \
+  #           --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/turbine-image:latest \
+  #           --platform managed \
+  #           --region europe-west1 \
+  #           --allow-unauthenticated \
+  #           --project mlops-tutorial-project
