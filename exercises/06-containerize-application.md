@@ -30,6 +30,8 @@ docker build -t turbine-image .
 docker run -p 8080:8080 turbine-image
 ```
 
+> **Note:** If you are working in Codespaces, you may need to forward port 8080 to your local machine. To do this, click the "Ports" button in the bottom left of the Codespaces window, and add a new port forwarding rule for port 8080. 
+
 4. When prompted, navigate to the URL in your browser: [http://0.0.0.0:8080/docs](http://0.0.0.0:8080/docs) and try the API again!
 
 Exacly the same as before, but now running in a container! 🎉
