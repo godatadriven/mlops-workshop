@@ -27,7 +27,7 @@ These are the steps to get started with your own editor (e.g. VSCode):
 1. Open a terminal
 2. Clone the repository
 ```bash
-git clone ...   # TODO PREP
+git clone https://github.com/ykerus/mlops-tutorial.git
 ```
 
 1. Open this folder (the cloned repo) in your editor
