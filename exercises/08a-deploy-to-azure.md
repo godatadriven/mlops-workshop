@@ -37,7 +37,10 @@
 
 ## 2. Deploy using the Azure CLI 🧑‍💻
 
-1. Make sure you have the Azure CLI installed. You can find the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+1. Make sure you have the Azure CLI installed. You can find the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli). Or, if you're working in Codespaces, you can run:
+```bash
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
 2. Open a terminal and login to Azure by running:
 ```bash
 az login
