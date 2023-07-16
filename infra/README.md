@@ -1,6 +1,7 @@
 
-# How to set up the MLflow tracking server
+# How to set up the MLflow tracking server 🐳
 
+You can ignore this for the tutorial, unless you're interested in how the MLflow tracking server was set up.
 
 ## Pre-requisites
 
@@ -88,7 +89,7 @@ If it states the image name is incorrect, you may need to update the line with `
 11.2 If computational limits are reached, increase the number of replicas in `mlflow-deployment.yaml` and apply the changes with `kubectl apply -f mlflow-deployment.yaml`.
 
 
-1.  Cleanup
+12.  Cleanup
 
 ```bash
 az group delete --name $RESOURCE_GROUP
