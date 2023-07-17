@@ -145,3 +145,4 @@ mlartifacts
 .DS_Store
 
 google-cloud-sdk*
+*.mov
