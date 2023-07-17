@@ -62,15 +62,17 @@ python -m venv .venv
 ```bash
 source .venv/bin/activate
 ```
-3. Install the environment as kernel so we can use it in Jupyter
-```bash
-ipython kernel install --name ".venv" --user
-```
-4. Install the dependencies
+
+3. Install the dependencies
 ```bash
 pip install -e ".[notebook]"
 ```
 Not working? Double check in which folder you are running this in. It should contain `pyproject.toml` and `setup.cfg`.
+
+4. Install the environment as kernel so we can use it in Jupyter
+```bash
+ipython kernel install --name ".venv" --user
+```
 
 5.  Check if all went well:
 ```bash
