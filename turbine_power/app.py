@@ -21,7 +21,8 @@ class InputData(BaseModel):
 stage = "production"
 model_name = "turbine-model"
 model = model_utils.load_model(model_name, stage)
-features = model_utils.get_feature_names(model_name, stage)
+feature_names = model_utils.get_feature_names(model_name, stage)
+
 app = FastAPI()
 
 @app.get("/")
@@ -30,8 +31,8 @@ async def root():
 
 @app.post("/predict")
 async def predict(input_data: InputData):
-    data = pd.DataFrame(input_data.dict())
-    X = data[features]
+    data = pd.DataFrame(input_data.model_dump())
+    X = data[feature_names]
     
     # Exercise: use the model to make predictions
     # ...
