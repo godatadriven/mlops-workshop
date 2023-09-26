@@ -11,17 +11,33 @@ Before we get started, we need to make sure you have access to a coding environm
 
 ### **Prerequisites**
 
-- Make sure you have [Docker](https://docs.docker.com/engine/install/) installed and running
 - (optional) Fork this repository so you can make changes to it. This will be useful if you want to work on the bonus CI/CD exercise.
 
 ### **Setting up your editor**
 
 There are two options you may choose from:
 
-1. Using your own editor (e.g. VSCode)
-2. Using Github Codespaces
+1. Using Github Codespaces (Recommended)
+2. Using your own editor (e.g. VSCode) 
 
-#### **1. Using your own editor**
+#### **1. Using Github Codespaces**
+
+These are the steps to get started with GitHub Codespaces:
+
+1. Navigate to this repository [on GitHub](https://github.com/ykerus/mlops-tutorial).
+2. Click on the "Code" button on the right above the folder structure
+3. Select "Codespaces"
+4. Click on "Open Codespaces on main"
+5. Wait until your environment is set up (this may take a while) and your terminal is ready
+6. Wait a little bit longer, as another setup step may run
+7. The setup is done when you you can run `docker` in a terminal and get a list of commands
+9. Run the following in a terminal to check if all went well:
+```bash
+python -c "import turbine_power"
+```
+No ouput? Good! <br>Getting a `ModuleNotFoundError`? Not good... The automated setup didn't work. Please follow the *Installing dependencies* section below to set up the environment manually.
+
+#### **2. Using your own editor**
 
 These are the steps to get started with your own editor (e.g. VSCode):
 1. Open a terminal
@@ -33,22 +49,6 @@ git clone https://github.com/ykerus/mlops-tutorial.git
 1. Open this folder (the cloned repo) in your editor
 2. Open a terminal in this folder
 3. Continue setting up in the "Installing dependencies" section below
-
-#### **2. Using Github Codespaces**
-
-These are the steps to get started with GitHub Codespaces:
-
-1. Navigate to this repository [on GitHub](https://github.com/ykerus/mlops-tutorial).
-2. Click on the "Code" button on the right above the folder structure
-3. Select "Codespaces"
-4. Click on "Open Codespaces on main"
-5. Wait until your environment is set up (this may take a while) and your terminal is ready
-6. Wait a little bit longer, as a another setup step will run automatically
-7. The setup is done when you you can run `docker` in a terminal and get a list of commands
-8. Once done, add port 8080 to the "Ports" section of the Codespaces window
-9. Continue setting up in the "Installing dependencies" section below
-
-> **Note:** In Codespaces, you are working within a Docker container which is running on Github's servers.  However, since we'll be covering containerization in this tutorial, we need to be able to create containers, within a container! If this does not work for you, make sure your Docker application is running by opening it locally, and then select "Rebuild container" from the command pallette, which you can open with CMD/CTRL + SHIFT + P. This may help. If it doesn't, we recommend using your own editor instead of Codespaces (see section above).
 
 ### **Installing dependencies**
 
