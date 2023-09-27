@@ -21,6 +21,7 @@ RUN pip install .
 
 # Make port available to the world outside this container
 ENV PORT 8080
+EXPOSE 8080
 
 # Run app.py when the container launches
 CMD ["python", "turbine_power/app.py"]
