@@ -24,7 +24,7 @@ There are two options you may choose from:
 
 These are the steps to get started with GitHub Codespaces:
 
-1. Navigate to this repository [on GitHub](https://github.com/ykerus/mlops-tutorial).
+1. Navigate to this repository [on GitHub](https://github.com/godatadriven/mlops-workshop).
 2. Click on the "Code" button on the right above the folder structure
 3. Select "Codespaces"
 4. Click on "Open Codespaces on main"
